@@ -21,9 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{00902eed-a367-4444-9ab0-9694d334f6c1}</ProjectGuid>
-    <RootNamespace>OpenGLStudy</RootNamespace>
+    <ProjectGuid>{5a169406-b22a-4907-b3fb-6176e8ba55a5}</ProjectGuid>
+    <RootNamespace>YoutubeOpenGl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>YoutubeOpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,12 +72,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Source\OpenGLStudy\OpenGLStudy\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Source\OpenGLStudy\OpenGLStudy\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Franc\source\repos\YoutubeOpenGl\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Franc\source\repos\YoutubeOpenGl\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Source\OpenGLStudy\OpenGLStudy\Libraries\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Source\OpenGLStudy\OpenGLStudy\Libraries\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Franc\source\repos\YoutubeOpenGl\Libraries\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Franc\source\repos\YoutubeOpenGl\Libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -138,7 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Maincpp.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
