@@ -34,9 +34,20 @@ int main()
 	//Vertice coordinates
 	GLfloat vertices[] =
 	{
-		-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
-		0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
-		0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f
+		-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, //lower left corner
+		0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, //lower right corner
+		0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f, //upper corner
+		-0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, //inner left
+		0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, //inner right
+		0.0f, -0.5f * float(sqrt(3)) / 3, 0.0f, //inner down
+	};
+
+	//Defining the triangles
+	GLuint indices[] =
+	{
+		0,3,5,
+		3,2,4,
+		5,4,1
 	};
 
 	GLFWwindow* window = glfwCreateWindow(800, 800, "Open GL Journey", NULL, NULL);
@@ -71,17 +82,24 @@ int main()
 	glDeleteShader(fragmentShader);
 
 
-	GLuint VAO, VBO; //Vertex Array Object, Vertex Buffer Object
+	GLuint VAO, VBO, EBO; //Vertex Array Object, Vertex Buffer Object
 
 	glGenVertexArrays(1, &VAO); //must be generated before VBO.
 	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
 
 	//Make the VAO the current Vertex Array Object by binding it.
 	glBindVertexArray(VAO);
 
+	//Bind the VBO specifying	it's a GL_Array_Buffer
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
+	//Introduce the vertices into the VBO
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
 
 	//Configure the Vertex Attribute so that OpenGL knows how to read the VBO.
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -91,6 +109,7 @@ int main()
 	//Bind both the VBO and VAO to 0 to that we don't accidentally modify them
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	//Specify the background color
 	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
@@ -98,7 +117,7 @@ int main()
 	glClear(GL_COLOR_BUFFER_BIT);
 	//Swap the back and front buffers
 	glfwSwapBuffers(window);
-	 
+
 	while (!glfwWindowShouldClose(window))
 	{
 		//Specify the background color
@@ -112,7 +131,7 @@ int main()
 		glBindVertexArray(VAO);
 
 		//Draw the triangle using the GL_TRIANGLES primitive
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
 		//Swap the back and front buffers
 		glfwSwapBuffers(window);
 
@@ -122,6 +141,7 @@ int main()
 
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &EBO);
 	glDeleteProgram(shaderProgram);
 
 	glfwDestroyWindow(window);
